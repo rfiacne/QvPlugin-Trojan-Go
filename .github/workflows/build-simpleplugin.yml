@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        qt_version: [5.11.5]
+        qt_version: [5.15.0]
         platform: [macos-11.0]
         arch: [arm64]
         include: 
@@ -32,7 +32,7 @@ jobs:
         run: echo ::set-output name=NAME::QvPlugin-TrojanGo
       - name: Checking out sources
         uses: actions/checkout@master
-      - name: Install Python 3.7 version
+      - name: Install dependencies
         run: |
           export PATH="/usr/local/opt/python/libexec/bin:$PATH"
           brew install python

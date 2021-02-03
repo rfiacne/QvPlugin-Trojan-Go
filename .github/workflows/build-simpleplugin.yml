@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         qt_version: [5.11.5]
-        platform: [macos-latest]
+        platform: [macos-11.0]
         arch: [arm64]
         include: 
           - platform: macos-11.0

@@ -10,27 +10,12 @@ jobs:
     strategy:
       matrix:
         qt_version: [5.11.3]
-        platform: [ubuntu-16.04, macos-latest, windows-latest]
-        arch: [x86, x64,arm64]
+        platform: [macos-latest]
+        arch: [arm64]
         include: 
-          - platform: windows-latest
-            arch: x86
-            qtarch: win32_msvc2015
-            cmakearch: Win32
-          - platform: windows-latest
-            arch: x64
-            qtarch: win64_msvc2015_64
-            cmakearch: x64
           - platform: macos-latest
             arch:  arm64
             cmackearch:  arm64
-        exclude:
-          - platform: ubuntu-16.04
-            arch: x86
-          - platform: macos-latest
-            arch: x86
-          - platform: windows-latest
-            arch: arm64
       fail-fast: false
         
     runs-on: ${{ matrix.platform }}
@@ -48,10 +33,9 @@ jobs:
       - name: Checking out sources
         uses: actions/checkout@master
       - name: Install Python 3.7 version
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.7'
-          architecture: ${{ matrix.arch }}
+        run: |
+          export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+          brew install python
       - name: Restoring submodules
         run: git submodule update --init
 # =========================================================================================================
